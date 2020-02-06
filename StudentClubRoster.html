@@ -39,7 +39,7 @@
     <h2>Student List</h2>
 
     <p>There are 
-        <span id="student-count">0
+        <span id="student-count">
           <!-- use JavaScript to count the number of students, and show here -->
 
         </span> 
@@ -57,7 +57,6 @@ let studentNameEl = document.querySelector('#student-name')
 let studentIdEl = document.querySelector('#student-id')
 let studentGpaEl = document.querySelector('#student-gpa')
 
-let listCount = 
 
 
 window.onload = function() {
@@ -79,44 +78,33 @@ alert('Please enter in a G.P.A. between 1-4')
 let studentString = studentNameEl.value + ", ID: "+ studentIdEl.value + ", GPA: " + studentGpaEl.value 
 let newListItemEl = document.createElement('li')
 newListItemEl.innerHTML = studentString
-let id = 'id' + listCount
-newListItemEl.setAttribute('id', id)    // sets the attribute on the list to id
+newListItemEl.addEventListener('click', selected);
 studentListEl.appendChild(newListItemEl)
-listCount++
+
 
 //resets our values in the boxes 
 studentNameEl.value = ''
 studentIdEl.value = ''
 studentGpaEl.value = ''
-
-document.getElementById(id).addEventListener('click', function(){
-    selected(id)
+updateCount()
 })
-removeButtonEl.addEventListener('click', deleted)
-
+removeButtonEl.addEventListener('click', function(){
+    deleted()
 })
-
-document.addEventListener('keyup', function(){
-if (event.keyCode === 13) {
 }
- })
+// our selected class using the id tage it knows what item to use the selected class on 
+function selected() {
+this.classList.toggle('selected')
 }
-
-function selected(id) {
-let selectedEl = document.getElementById(id)
-if(selectedEl.classList.contains('selected')){
-    selectedEl.classList.remove('selected')
-}
-else{
-    selectedEl.classList.add('selected')
-}
-}
-
 function deleted() {
- let selected = documents.getElementsByClassName('selected')
- while(selected[0]){
-     selcted[0].parentNode.removeChild(selected[0])
+ let selected = documents.querySelector('selected')
+ while(selected[1]){
+     selcted[1].parentNode.removeChild(selected[1])
  }
+}
+function updateCount() {
+    var count = studentListEl.childElementCount;
+    studentCount.innerHTML = count;
 }
 
     /* Add the following functionality to this page
