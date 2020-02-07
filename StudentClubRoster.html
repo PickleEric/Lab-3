@@ -50,13 +50,14 @@
     <button id="remove-selected-students">Remove selected students</button>
 <script>
 let addButtonEl = document.querySelector('#add-student')
-let removeButtonEl = document.querySelector('remove-selected-students')
+let removeButtonEl = document.querySelector('#remove-selected-students')
 let studentListEl = document.querySelector('#student-list')
-let studentCount = document.querySelector('student-count')
+let studentCountEl = document.querySelector('#student-count')
 let studentNameEl = document.querySelector('#student-name')
 let studentIdEl = document.querySelector('#student-id')
 let studentGpaEl = document.querySelector('#student-gpa')
-
+let studentCount = 0
+studentCountEl.innerHTML = studentCount
 
 
 window.onload = function() {
@@ -76,11 +77,10 @@ alert('Please enter in a G.P.A. between 1-4')
     return
 }
 let studentString = studentNameEl.value + ", ID: "+ studentIdEl.value + ", GPA: " + studentGpaEl.value 
-let newListItemEl = document.createElement('li')
+let newListItemEl = document.createElement('li') // creates a new list element
 newListItemEl.innerHTML = studentString
 newListItemEl.addEventListener('click', selected);
 studentListEl.appendChild(newListItemEl)
-
 
 //resets our values in the boxes 
 studentNameEl.value = ''
@@ -89,22 +89,23 @@ studentGpaEl.value = ''
 updateCount()
 })
 removeButtonEl.addEventListener('click', function(){
-    deleted()
+   let selected = document.querySelectorAll('.selected')
+ console.log(selected)
+ while(selected.length > 0){     
+     let selected = document.querySelector('.selected')
+     selected.parentNode.removeChild(selected)
+     updateCount()
+}
 })
 }
-// our selected class using the id tage it knows what item to use the selected class on 
+// my select funciton that toggles the selected class
 function selected() {
 this.classList.toggle('selected')
 }
-function deleted() {
- let selected = documents.querySelector('selected')
- while(selected[1]){
-     selcted[1].parentNode.removeChild(selected[1])
- }
-}
+// this updates my count depending on how many elements are in the list.
 function updateCount() {
     var count = studentListEl.childElementCount;
-    studentCount.innerHTML = count;
+    studentCountEl.innerHTML = count;
 }
 
     /* Add the following functionality to this page
